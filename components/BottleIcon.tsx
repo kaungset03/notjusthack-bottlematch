@@ -5,7 +5,7 @@ const BottleIcon = (props: SvgProps) => (
   <Svg
     fill={"none"}
     width="100px"
-    height="180px"
+    height="100px"
     viewBox="0 0 24 24"
     id="soda-bottle-2"
     data-name="Line Color"
@@ -19,7 +19,7 @@ const BottleIcon = (props: SvgProps) => (
       stroke={"#000"}
       strokeLinecap={"round"}
       strokeLinejoin={"round"}
-      strokeWidth={0.5}
+      strokeWidth={0.8}
     />
   </Svg>
 );
