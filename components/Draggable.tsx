@@ -8,10 +8,19 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import BottleIcon from "@/components/BottleIcon";
 import { StyleSheet } from "react-native";
 
+type DropZone = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 type DraggableProps = {
-    color: string
+  color: string;
+  checkDropZone: (x: number, y: number, color: string) => void;
+
 };
-const Draggable = ({ color }: DraggableProps) => {
+const Draggable = ({ color, checkDropZone }: DraggableProps) => {
   const pressed = useSharedValue<boolean>(false);
   const offset = useSharedValue<{ x: number; y: number }>({ x: 0, y: 0 });
 
@@ -25,8 +34,12 @@ const Draggable = ({ color }: DraggableProps) => {
         y: translationY,
       };
     })
-    .onFinalize(() => {
+    .onFinalize(({absoluteX, absoluteY}) => {
       pressed.value = false;
+      
+      checkDropZone(absoluteX, absoluteY, color);
+      //console.log(absoluteX, absoluteY);
+      
       offset.value = withSpring({ x: 0, y: 0 });
     });
 
@@ -50,8 +63,6 @@ export default Draggable;
 
 const styles = StyleSheet.create({
   bottle: {
-    borderWidth: 1,
-    borderColor: "red",
-  }
-})
-
+   
+  },
+});
